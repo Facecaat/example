@@ -4,6 +4,17 @@ on:
   push:
     branches: [ main ]
 
+  workflow_dispatch:
+    inputs:
+      test_environment:
+        description: 'Test Environment'
+        required: false
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -20,13 +31,3 @@ jobs:
       - name: Run tests
         run: pytest
 
-workflow_dispatch:
-    inputs:
-      test_environment:
-        description: 'Test Environment'
-        required: false
-        default: 'staging'
-        type: choice
-        options:
-          - staging
-          - production
